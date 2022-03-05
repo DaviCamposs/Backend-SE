@@ -35,6 +35,7 @@ const login = async (req,res) => {
             sucesso: true,
             id: usuario.id,
             nome: usuario.nome,
+            email,
             mensagem: 'Sessao iniciada',
             token
         })
