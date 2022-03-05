@@ -23,7 +23,12 @@ const curso = new Schema({
     },
     tags: [{
         type: String
-    }]
+    }],
+    modulo: {
+        type: Schema.Types.ObjectId,
+        ref: "modulos",
+        required: true
+    }
 })
 
 module.exports = model('Curso', curso)

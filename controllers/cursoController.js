@@ -1,15 +1,15 @@
 const Curso = require('../models/curso')
 
 const adicionarCurso = async (req,res) => {
-    const { nome , titulo , descricao , imagem , conteudo , tags} = req.body
+    const { nome , titulo , descricao , imagem , conteudo , tags , modulo } = req.body
 
     try {
-        const novoCurso = new Curso({ nome , titulo , descricao , imagem , conteudo , tags})
+        const novoCurso = new Curso({ nome , titulo , descricao , imagem , conteudo , tags , modulo})
         await novoCurso.save()
 
         return res.status(201).json({
             sucesso: true,
-            nome , titulo , descricao , imagem , conteudo , tags,
+            nome , titulo , descricao , imagem , conteudo , tags, modulo,
             mensagem: 'Curso adicionado com sucesso',
         })
     } catch (erro) {
