@@ -7,6 +7,7 @@ const conexaoDB = require('./db/config')
 
 const autenticacaoRouter = require('./routes/autenticacao')
 const moduloRouter = require('./routes/modulo')
+const materialRouter = require('./routes/material')
 
 const app = express()
 
@@ -18,6 +19,7 @@ conexaoDB()
 
 app.use('/autenticacao', autenticacaoRouter)
 app.use('/modulo', moduloRouter)
+app.use('/material', materialRouter)
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`Servidor iniciado na porta ${process.env.PORT}`)
