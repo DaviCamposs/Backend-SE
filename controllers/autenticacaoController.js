@@ -47,6 +47,49 @@ const login = async (req,res) => {
     }
 }
 
+const registro = async (req,res) => {
+    const { nome , email , senha } = req.body
+
+    try {
+
+        const usuario = await Usuario.findOne({ email })
+        if (usuario) {
+            return res.status(501).json({
+                sucesso: false,
+                mensagem: 'Email já usado por um usuário'
+            })
+        }
+
+        const novoUsuario = new Usuario({ nome , email, senha })
+        const salto = bcryptjs.genSaltSync(12)
+        novoUsuario.senha = bcryptjs.hashSync(senha, salto)
+
+        await novoUsuario.save()
+
+        const payload = {
+            id: novoUsuario.id
+        }
+
+        const token = jwt.sign(payload, process.env.JWT_SECRET  , { expiresIn: '3h' })
+
+        return res.status(201).json({
+            sucesso: true,
+            id: novoUsuario.id,
+            email,
+            nome,
+            mensagem: 'Usuario registrado com sucesso',
+            token
+        })
+
+    } catch (erro) {
+        return res.status(500).json({
+            sucesso: false,
+            mensagem: 'Erro ao registrar usuário, tente novamente'
+        })
+    }
+}
+
 module.exports = {
-    login
+    login,
+    registro
 }
