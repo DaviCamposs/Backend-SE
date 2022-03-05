@@ -11,4 +11,4 @@ const modulo = new Schema({
     }
 })
 
-module.exports = model('Modulo', module)
+module.exports = model('Modulo', modulo)
