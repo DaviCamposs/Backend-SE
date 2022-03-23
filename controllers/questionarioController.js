@@ -20,6 +20,47 @@ const adicionarQuestionario = async (req,res) => {
     }
 }
 
+const getQuestionarios = async (req,res) => {
+
+    try {
+        const questionarios = await Questionario.find()
+
+        return res.status(201).json({
+            sucesso: true,
+            questionarios,
+            mensagem: 'Questionário lido com sucesso',
+        })
+    } catch (erro) {
+        return res.status(500).json({
+            sucesso: false,
+            mensagem: 'Erro ao ler questionario, tente novamente'
+        })
+    }
+}
+
+const getQuestionario = async (req,res) => {
+
+    try {
+
+        const id = req.params.id
+
+        const questionario = await Questionario.findOne({_id: id})
+
+        return res.status(201).json({
+            sucesso: true,
+            questionario,
+            mensagem: 'Questionário lido com sucesso',
+        })
+    } catch (erro) {
+        return res.status(500).json({
+            sucesso: false,
+            mensagem: 'Erro ao ler questionario, tente novamente'
+        })
+    }
+}
+
 module.exports = {
-    adicionarQuestionario
+    adicionarQuestionario,
+    getQuestionarios,
+    getQuestionario
 }

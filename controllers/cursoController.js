@@ -20,6 +20,27 @@ const adicionarCurso = async (req,res) => {
     }
 }
 
+const getCurso = async (req,res) => {
+    const id = req.params.id
+
+    try {
+        
+        const curso = await Curso.findOne({_id: id})
+
+        return res.status(201).json({
+            sucesso: true,
+            curso,
+            mensagem: 'Curso lido com sucesso',
+        })
+    } catch (erro) {
+        return res.status(500).json({
+            sucesso: false,
+            mensagem: 'Erro ao let curso, tente novamente'
+        })
+    }
+}
+
 module.exports = {
-    adicionarCurso
+    adicionarCurso,
+    getCurso
 }

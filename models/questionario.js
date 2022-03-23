@@ -16,7 +16,11 @@ const questao = new Schema({
         type: String,
         required: true
     },
-    alternativas: [alternativa]
+    alternativas: [alternativa],
+    explicacao: {
+        type: String,
+        required: true
+    }
 })
 
 const questionario = new Schema({

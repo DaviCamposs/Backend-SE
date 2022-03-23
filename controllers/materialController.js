@@ -20,6 +20,25 @@ const adicionarMaterial = async (req,res) => {
     }
 }
 
+const getMateriais = async (req,res) => {
+
+    try {
+        const materiais = await Material.find()
+
+        return res.status(201).json({
+            sucesso: true,
+            materiais,
+            mensagem: 'Material lido com sucesso',
+        })
+    } catch (erro) {
+        return res.status(500).json({
+            sucesso: false,
+            mensagem: 'Erro ao ler materiais, tente novamente'
+        })
+    }
+}
+
 module.exports = {
-    adicionarMaterial
+    adicionarMaterial,
+    getMateriais
 }
